@@ -1,0 +1,17 @@
+external class demos="/home/wangxing/Software/cim-3.37/demos/demos.atr";
+
+Demos
+begin
+    real r;
+    integer i;
+
+    hold(100);
+
+    outfix(time, 2, 0);
+    outimage;
+    
+    i := 2;
+    r := 3.141592653;
+    outfix(r*i, 10, 0);
+    outimage;
+end;

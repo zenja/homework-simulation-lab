@@ -1,0 +1,10 @@
+external class demos="/home/wangxing/Software/cim-3.37/demos/demos.atr";
+
+Demos
+begin
+    ref(count) c;
+    c :- new count("Data"); 
+    c.update(1);
+    c.update(3);
+end;
+

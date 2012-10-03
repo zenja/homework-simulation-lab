@@ -1,0 +1,6 @@
+begin
+    integer n;
+    n := 5;
+    outfix(n, 0, 0);
+    outimage;
+end;

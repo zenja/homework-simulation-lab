@@ -1,0 +1,20 @@
+begin
+    class vehicle(registered, weight);
+        integer registered; real weight;
+    begin
+        boolean brokendown;
+        if registered < 1885 or weight <= 0.0 then ERROR;
+    end;
+
+    vehicle class car(maxspeed, seats); integer maxspeed, seats;
+    begin
+        if maxspeed < 50 or seats < 1 then ERROR;
+    end;
+
+    ref(vehicle) FIAT, ROLLS;
+    ref(car) T;
+
+    FLAT :- new vehicle(1974, 0.8);
+    ROLLS :- new vehicle(1930, 3.0);
+    T :- new car(1969, 1.5, 145, 5);
+L:end;

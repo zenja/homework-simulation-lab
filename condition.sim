@@ -1,0 +1,18 @@
+begin
+    boolean procedure test; begin
+        if true and 5>1 then begin
+            test := true;
+        end;
+        outtext("lalala");
+        outimage;
+        if true then begin
+            test := false;
+        end;
+    end;
+
+    boolean t;
+    t :=test;
+    if t then begin
+        outtext("t is true");
+    end;
+end;

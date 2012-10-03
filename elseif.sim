@@ -1,0 +1,36 @@
+begin
+    integer i;
+    boolean b1, b2;
+
+    i := 95;
+    
+    if i > 90 then begin
+        outtext("i > 90");
+        outimage;
+    end
+    else if i > 80 then begin
+        outtext("i > 80");
+        outimage;
+    end
+    else begin
+        outtext("else");
+        outimage;
+    end;
+    
+    b1 := true;
+    b2 := false;
+
+    if b1 and b2 then begin
+        outtext("b1 and b2: ok");
+        outimage;
+    end
+    else begin
+        outtext("b1 and b2: not ok");
+        outimage;
+    end;
+
+    if not b2 and i > 90 then begin
+        outtext("not b2 and i > 90");
+        outimage;
+    end;
+end;

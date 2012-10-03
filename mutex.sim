@@ -1,0 +1,21 @@
+BEGIN
+    EXTERNAL CLASS demos="/home/wangxing/Software/cim-3.37/demos/demos.atr";
+    demos BEGIN
+        REF(Res) mutex;
+        ENTITY CLASS NextStep(t); REAL t;
+        BEGIN
+            mutex.acquire(1);
+            Hold(t);
+            OutText("clock=");PrintReal(time);OutImage;
+            mutex.release(1);
+        END;
+        !main constructor;
+        trace;
+        mutex :- NEW Res("mutex",1);
+        NEW NextStep("step 1",1.0).schedule(0.0);
+        NEW NextStep("step 2",2.0).schedule(0.0);
+        NEW NextStep("step 3",3.0).schedule(0.0);
+        Hold(10.0);
+    END demos;
+END;
+

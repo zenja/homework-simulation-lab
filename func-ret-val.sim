@@ -1,0 +1,21 @@
+begin
+    integer a;
+
+    integer procedure inc(num); integer num;
+    begin
+        inc := num + 1;
+    end;
+
+    a := 10;
+
+    if inc(a) == 11 then
+    begin
+        outtext("yes");
+    end
+    else
+    begin
+        outtext("no");
+    end;
+
+    outimage;
+end;

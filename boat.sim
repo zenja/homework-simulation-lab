@@ -1,0 +1,28 @@
+external class demos="/home/wangxing/Software/cim-3.37/demos/demos.atr";
+Demos
+begin
+    ref(res) tugs, jetties;
+
+    entity class boat;
+    begin
+        jetties.acquire(2);
+        tugs.acquire(2);
+        hold(2.0);
+        tugs.release(2);
+
+        hold(14.0);
+
+        tugs.acquire(1);
+        hold(2.0);
+        tugs.release(1);
+        jetties.release(1);
+    end;
+
+    jetties :- new res("jetties", 2);
+    tugs :- new res("tugs", 3);
+
+    new boat("boat1").schedule(0.0);
+    new boat("boat2").schedule(1.0);
+    new boat("boat3").schedule(15.0);
+    hold(36.0);
+end;

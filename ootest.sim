@@ -1,0 +1,23 @@
+begin
+    class counter(init_value);
+        integer init_value;
+    begin
+        procedure inc;
+        begin
+            init_value := init_value + 1;
+        end;
+        
+        procedure show;
+        begin
+            outtext("S-H-O-W");
+            outimage;
+        end;
+    end;
+
+    ref(counter) c;
+
+    c :- new counter(10);
+
+    c.inc;
+    c.show;
+end;

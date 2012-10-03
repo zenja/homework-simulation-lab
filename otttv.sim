@@ -1,0 +1,205 @@
+external class demos="/home/wangxing/Software/cim-3.37/demos/demos.atr";
+
+Demos
+begin
+    integer numSession;
+
+    ref(iDist) sessionInterval_;    ! the interval between session arrives;
+    ref(RDist) sessionTime_;        ! the life time of a session;
+    ref(res) bandwidth_;            ! the bandwidth of the system;
+    ref(bin) shutdown_;
+    ref(bdist) drawSmartphone_;
+    integer bMin_;
+    integer bMax_;
+    integer bStep_;
+
+    ! statistical data;
+    real dataAmount_;                ! all amount of transmitted data of all sessions;
+    real timeAmount_;                ! all amount of  time of all sessions;
+    ref(count) numBitrateChange_;    ! the number of bitrate changes;
+    ref(count) numVeryGood_;         ! the number of very good quality of all sessions;
+
+    procedure my_debug_r(msg, num); text msg; real num; begin
+        outtext(msg);
+        outfix(num, 5, 0);
+        outimage;
+    end;
+
+    procedure my_debug_i(msg, num); text msg; integer num; begin
+        outtext(msg);
+        outfix(num, 0, 0);
+        outimage;
+    end;
+
+    ! should be called after transmitting some amount of data with consistent bitrate;
+    procedure updateTransmitCount(rate, time); integer rate; real time; begin
+        dataAmount_ := dataAmount_ + rate*time;
+        timeAmount_ := timeAmount_ + time;
+    end;
+
+    ! should be called when the bitrate is changed;
+    procedure bitrateChanged; begin
+        numBitrateChange_.update(1);
+    end;
+
+    entity class Generator;
+    begin
+        integer i;
+        for i := 1 step 1 until numSession do
+        begin
+            integer sessionIntervalTime;
+            sessionIntervalTime := sessionInterval_.sample;
+            new Session(edit("Session", i)).schedule(0);
+            hold(sessionIntervalTime);
+
+            ! debug;
+            my_debug_i("session interval: ", sessionIntervalTime);
+        end;
+
+    end;
+
+    entity class Session;
+    begin
+        long real timestamp;
+        long real endtime;
+        integer acquiredBandwidth;
+        ref(RDist) bitrateInterval;    ! the interval between bitrate changes;
+        boolean isSmartphone;
+
+        ! acquire the bandwidth at the beginning of the session;
+        ! and set the acquiredBandwidth;
+        procedure acquire_first_bandwidth; begin
+            integer num;
+            num := bMax_;
+            while bandwidth_.avail < num do begin
+                num := num - bStep_;
+            end;
+            if num < bMin_ then begin
+                num := bMin_; 
+            end;
+            bandwidth_.acquire(num);
+            acquiredBandwidth := num;
+
+            ! need this?;
+            bitrate_changed;
+        end;
+
+        procedure change_bitrate; begin
+            integer currentAvailBW;
+            currentAvailBW := bandwidth_.avail;
+
+            ! calculate the new bitrate;
+            if currentAvailBW > bMin_ then
+            begin
+                ! increase bandwidth by bStep_ if not at max bitrate;
+                if acquiredBandwidth < bMax_ then begin
+                    bandwidth_.acquire(bStep_);
+                    acquiredBandwidth := acquiredBandwidth + bStep_;
+                end;
+            end
+            else
+            begin
+                ! decrease bandwidth by bStep_ if not at min bitrate;
+                if acquiredBandwidth > bMin_ then begin
+                    bandwidth_.release(bStep_);
+                    acquiredBandwidth := acquiredBandwidth - bStep_;
+                end;
+            end;
+
+            ! update statistical data;
+            bitrate_changed;
+        end;
+
+        ! code to execute when the bitrate is changed;
+        procedure bitrate_changed; begin
+            numBitrateChange_.update(1);
+
+            if ifVeryGood then begin
+                numVeryGood_.update(1);
+            end;
+        end;
+
+        ! judge if current bitrate is very good;
+        boolean procedure ifVeryGood; begin
+            if isSmartphone and acquiredBandwidth >= 4 then begin
+                ifVeryGood := true;
+            end
+            else if not isSmartphone and acquiredBandwidth >= 6 then begin
+                ifVeryGood := true;
+            end
+            else begin
+                ifVeryGood := false;
+            end;
+        end;
+
+        !--------------- statements ---------------;
+
+        timestamp := time;
+        endtime := timestamp + sessionTime_.sample;
+        bitrateInterval :- new NegExp("bitrate ITV", 10);
+        acquiredBandwidth := 0; ! init value;
+        isSmartphone := drawSmartphone_.sample;
+
+        ! debug;
+        my_debug_r("session last time: ", endtime - timestamp);
+
+        ! acquire bandwidth;
+        acquire_first_bandwidth;
+        
+        ! keep changing bitrate until session's time up;
+        while time < endtime do begin
+            ! wait for next bitrate change...;
+            ! -- hold: min(remaining time, sample time);
+            real remainingTime, sampleTime, actualTime;
+            sampleTime := bitrateInterval.sample;
+            remainingTime := endtime - timestamp;
+            if sampleTime > remainingTime then actualTime := remainingTime else actualTime := sampleTime;
+            hold(actualTime);
+
+            ! change bitrate;
+            change_bitrate;
+
+            ! updata statistical data;
+            updateTransmitCount(acquiredBandwidth, actualTime);
+        end;
+
+        ! IMPORTANT: release acquired bandwidth;
+        bandwidth_.release(acquiredBandwidth);
+        acquiredBandwidth := 0;
+
+        ! give a shutdown;
+        shutdown_.give(1);
+
+    end;
+
+    numSession := 1000;  ! number of all sessions;
+
+    sessionInterval_ :- new Poisson("session ITV", 1/30);
+    sessionTime_ :- new NegExp("session T", 1/90);
+    bandwidth_ :- new Res("bandwidth", 100);
+    shutdown_ :- new Bin("shutdown", 0);
+    drawSmartphone_ :- new Draw("is smartphone", 0.7);
+    bMin_ := 2;
+    bMax_ := 8;
+    bStep_ := 2;
+
+    ! init statistical data;
+    dataAmount_ := 0.0;
+    timeAmount_ := 0.0;
+    numBitrateChange_ :- new count("BR Change");
+    numVeryGood_ :- new count("Very Good");
+
+    ! ******************** Statements *********************;
+
+    ! generate sessions;
+    new Generator("Generator").schedule(0);
+
+    ! wait for all sessions are finished;
+    shutdown_.take(numSession);
+
+    ! print statistical data which cannot be printed automatically;
+    outtext("Average bitrate:");
+    outfix(dataAmount_/timeAmount_, 2, 0);
+    outimage;
+
+end;

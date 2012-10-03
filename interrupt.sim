@@ -1,0 +1,38 @@
+external class demos="/home/wangxing/Software/cim-3.37/demos/demos.atr";
+
+Demos
+begin
+    ref(Shou) s;
+    ref(Gong) g;
+
+    entity class Shou;
+    begin
+        outtext(edit("S:", time));
+        outimage;
+        hold(1000);
+        outtext(edit("E:", time));
+        outimage;
+        if interrupted > 0 then begin
+            outtext(edit("I:", time));
+            outimage;
+            interrupted := 0;
+        end;
+    end;
+
+    entity class Gong;
+    begin
+        outtext("ready to visit shou...");
+        outimage;
+        s.interrupt(1);
+        outtext("already visited :D");
+        outimage;
+    end;
+
+    s :- new Shou("shou");
+    g :- new Gong("gong");
+
+    s.schedule(0);
+    g.schedule(100);
+        
+    hold(10000);
+end;
