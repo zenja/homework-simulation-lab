@@ -19,16 +19,23 @@ begin
     ref(count) numBitrateChange_;    ! the number of bitrate changes;
     ref(count) numVeryGood_;         ! the number of very good quality of all sessions;
 
+    ! debug flag;
+    boolean debugFlag_;
+
     procedure my_debug_r(msg, num); text msg; real num; begin
-        outtext(msg);
-        outfix(num, 5, 0);
-        outimage;
+        if debugFlag_ then begin
+            outtext(msg);
+            outfix(num, 5, 0);
+            outimage;
+        end;
     end;
 
     procedure my_debug_i(msg, num); text msg; integer num; begin
-        outtext(msg);
-        outfix(num, 0, 0);
-        outimage;
+        if debugFlag_ then begin
+            outtext(msg);
+            outfix(num, 0, 0);
+            outimage;
+        end;
     end;
 
     ! should be called after transmitting some amount of data with consistent bitrate;
@@ -70,6 +77,10 @@ begin
         ! and set the acquiredBandwidth;
         procedure acquire_first_bandwidth; begin
             integer num;
+
+            !debug;
+            my_debug_i("bandwidth available: ", bandwidth_.avail);
+
             num := bMax_;
             while bandwidth_.avail < num do begin
                 num := num - bStep_;
@@ -79,6 +90,9 @@ begin
             end;
             bandwidth_.acquire(num);
             acquiredBandwidth := num;
+
+            !debug;
+            my_debug_i("first acquire: ", num);
 
             ! need this?;
             bitrate_changed;
@@ -175,7 +189,7 @@ begin
 
     end;
 
-    numSession := 1000;  ! number of all sessions;
+    numSession := 5000;  ! number of all sessions;
 
     sessionInterval_ :- new Poisson("session ITV", 1/30);
     sessionTime_ :- new NegExp("session T", 1/90);
@@ -192,6 +206,9 @@ begin
     numBitrateChange_ :- new count("BR Change");
     numVeryGood_ :- new count("Very Good");
 
+    ! debug flag;
+    debugFlag_ := false;
+
     ! ******************** Statements *********************;
 
     ! generate sessions;
@@ -201,7 +218,7 @@ begin
     shutdown_.take(numSession);
 
     ! print statistical data which cannot be printed automatically;
-    outtext("Average bitrate:");
+    outtext("***Average bitrate:***");
     outfix(dataAmount_/timeAmount_, 2, 0);
     outimage;
 
