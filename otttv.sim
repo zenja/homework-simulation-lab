@@ -161,6 +161,9 @@ begin
 
             ! updata statistical data;
             updateTransmitCount(acquiredBandwidth, actualTime);
+
+            ! debug;
+            my_debug_i("bitrate changed: ", acquiredBandwidth);
         end;
 
         ! IMPORTANT: release acquired bandwidth;
