@@ -1,0 +1,15 @@
+begin
+    if 1>2 then begin
+        if 2>3 then begin
+            outtext("lala");
+        end
+        else begin
+            outtext("tata");
+        end;
+    end
+    else begin
+        if 3>4 then begin
+            outtext("baba");
+        end;
+    end;
+end;

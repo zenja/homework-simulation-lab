@@ -4,8 +4,9 @@ Demos
 begin
     integer numSession;
 
-    ref(iDist) sessionInterval_;    ! the interval between session arrives;
+    ref(rDist) sessionInterval_;    ! the interval between session arrives;
     ref(RDist) sessionTime_;        ! the life time of a session;
+    ref(RDist) bitrateInterval_;    ! the interval between bitrate changes;
     ref(res) bandwidth_;            ! the bandwidth of the system;
     ref(bin) shutdown_;
     ref(bdist) drawSmartphone_;
@@ -18,6 +19,8 @@ begin
     real timeAmount_;                ! all amount of  time of all sessions;
     ref(count) numBitrateChange_;    ! the number of bitrate changes;
     ref(count) numVeryGood_;         ! the number of very good quality of all sessions;
+    ref(count) numAllSession_;       ! the number of all sessions, both effective ones and rejected ones;
+    ref(count) numEffectiveSession_; ! the number of effective sessions;
 
     ! debug flag;
     boolean debugFlag_;
@@ -70,23 +73,23 @@ begin
         long real timestamp;
         long real endtime;
         integer acquiredBandwidth;
-        ref(RDist) bitrateInterval;    ! the interval between bitrate changes;
         boolean isSmartphone;
 
         ! acquire the bandwidth at the beginning of the session;
         ! and set the acquiredBandwidth;
+        ! must make sure that there are at least bMax_ bandwidth;
         procedure acquire_first_bandwidth; begin
             integer num;
 
             !debug;
             my_debug_i("bandwidth available: ", bandwidth_.avail);
 
-            num := bMax_;
-            while bandwidth_.avail < num do begin
-                num := num - bStep_;
-            end;
-            if num < bMin_ then begin
-                num := bMin_; 
+            ! try acquire max bandwidth or the remains;
+            if bandwidth_.avail >= bMax_ then begin
+                num := bMax_;
+            end
+            else begin
+                num := bandwidth_.avail;
             end;
             bandwidth_.acquire(num);
             acquiredBandwidth := num;
@@ -94,8 +97,8 @@ begin
             !debug;
             my_debug_i("first acquire: ", num);
 
-            ! need this?;
-            bitrate_changed;
+            ! need this? I don't think so now..;
+            !bitrate_changed;
         end;
 
         procedure change_bitrate; begin
@@ -150,23 +153,33 @@ begin
 
         timestamp := time;
         endtime := timestamp + sessionTime_.sample;
-        bitrateInterval :- new NegExp("bitrate ITV", 10);
         acquiredBandwidth := 0; ! init value;
         isSmartphone := drawSmartphone_.sample;
 
         ! debug;
         my_debug_r("session last time: ", endtime - timestamp);
 
+        ! one new session;
+        numAllSession_.update(1);
+
+        ! if no enough resource left (bMin), reject the session;
+        if bandwidth_.avail < bMin_ then begin
+            goto kill_it;
+        end;
+
         ! acquire bandwidth;
         acquire_first_bandwidth;
-        
+
+        ! one new effective session;
+        numEffectiveSession_.update(1);
+
         ! keep changing bitrate until session's time up;
         while time < endtime do begin
             ! wait for next bitrate change...;
             ! -- hold: min(remaining time, sample time);
             real remainingTime, sampleTime, actualTime;
-            sampleTime := bitrateInterval.sample;
-            remainingTime := endtime - timestamp;
+            sampleTime := bitrateInterval_.sample;
+            remainingTime := endtime - time;
             if sampleTime > remainingTime then actualTime := remainingTime else actualTime := sampleTime;
             hold(actualTime);
 
@@ -184,6 +197,8 @@ begin
         bandwidth_.release(acquiredBandwidth);
         acquiredBandwidth := 0;
 
+    kill_it:
+
         ! give a shutdown;
         shutdown_.give(1);
 
@@ -191,8 +206,9 @@ begin
 
     numSession := 5000;  ! number of all sessions;
 
-    sessionInterval_ :- new Poisson("session ITV", 1/30);
+    sessionInterval_ :- new NegExp("session ITV", 1/4);
     sessionTime_ :- new NegExp("session T", 1/90);
+    bitrateInterval_ :- new NegExp("bitrate ITV", 0.1);
     bandwidth_ :- new Res("bandwidth", 100);
     shutdown_ :- new Bin("shutdown", 0);
     drawSmartphone_ :- new Draw("is smartphone", 0.7);
@@ -205,21 +221,27 @@ begin
     timeAmount_ := 0.0;
     numBitrateChange_ :- new count("BR Change");
     numVeryGood_ :- new count("Very Good");
+    numAllSession_ :- new count("all_sessions");
+    numEffectiveSession_ :- new count("effective_s");
 
     ! debug flag;
     debugFlag_ := false;
 
     ! ******************** Statements *********************;
 
-    ! generate sessions;
-    new Generator("Generator").schedule(0);
+    while REPLICATION <= 10 do begin
+        ! generate sessions;
+        new Generator("Generator").schedule(0);
 
-    ! wait for all sessions are finished;
-    shutdown_.take(numSession);
+        ! wait for all sessions are finished;
+        shutdown_.take(numSession);
 
-    ! print statistical data which cannot be printed automatically;
-    outtext("***Average bitrate:***");
-    outfix(dataAmount_/timeAmount_, 2, 0);
-    outimage;
+        ! print statistical data which cannot be printed automatically;
+        outtext("***Average bitrate:***");
+        outfix(dataAmount_/timeAmount_, 2, 0);
+        outimage;
+
+        REPLICATE;
+    end;
 
 end;
