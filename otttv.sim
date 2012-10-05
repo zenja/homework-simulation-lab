@@ -15,8 +15,8 @@ begin
     integer bStep_;
 
     ! statistical data;
-    long real dataAmount_;                ! all amount of transmitted data of all sessions;
-    long real timeAmount_;                ! all amount of  time of all sessions;
+    long real dataAmount_;           ! all amount of transmitted data of all sessions;
+    long real timeAmount_;           ! all amount of  time of all sessions;
     ref(count) numBitrateChange_;    ! the number of bitrate changes;
     ref(count) numVeryGood_;         ! the number of very good quality of all sessions;
     ref(count) numAllSession_;       ! the number of all sessions, both effective ones and rejected ones;
@@ -213,14 +213,14 @@ begin
 
     sessionInterval_ :- new NegExp("session ITV", 1/4);
     sessionTime_ :- new NegExp("session T", 1/90);
-    bitrateInterval_ :- new NegExp("bitrate ITV", 0.1);
-    !bitrateInterval_ :- new Constant("bitrate ITV", 1);
+    !bitrateInterval_ :- new NegExp("bitrate ITV", 0);
+    bitrateInterval_ :- new Constant("bitrate ITV", 1);
     bandwidth_ :- new Res("bandwidth", 100);
     shutdown_ :- new Bin("shutdown", 0);
     drawSmartphone_ :- new Draw("is smartphone", 0.7);
     bMin_ := 2;
     bMax_ := 8;
-    bStep_ := 2;
+    bStep_ := 1;
 
     ! init statistical data;
     dataAmount_ := 0.0;
@@ -236,6 +236,10 @@ begin
     ! ******************** Statements *********************;
 
     while REPLICATION <= 10 do begin
+        ! re-init non-entity statistical data;
+        dataAmount_ := 0;
+        timeAmount_ := 0;
+
         ! generate sessions;
         new Generator("Generator").schedule(0);
 
@@ -251,6 +255,9 @@ begin
         outimage;
         outtext("Num of bitrate changes: ");
         outfix(numBitrateChange_.Obs, 0, 0);
+        outimage;
+        outtext("Num of very good changes: ");
+        outfix(numVeryGood_.Obs, 0, 0);
         outimage;
         outtext("Probability of very good QoE: ");
         outfix(numVeryGood_.Obs/numBitrateChange_.Obs, 4, 0);

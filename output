@@ -1,11 +1,12 @@
 
 ~~~~~~~~~~ Statistical Data ~~~~~~~~~~
-Average bitrate: 4.83
-Num of bitrate changes: 44286
-Probability of very good QoE: 0.6419
+Average bitrate: 5.15
+Num of bitrate changes: 41449
+Num of very good changes: 26553
+Probability of very good QoE: 0.6406
 Number of all sessions: 5000
-Number of effective sessions: 4425
-Session rejection rate: 0.1150
+Number of effective sessions: 4183
+Session rejection rate: 0.1634
 
 
                        CLOCK TIME =  20470.408
@@ -23,7 +24,7 @@ REPLICATION:   1
 TITLE       /   (RE)SET/   OBS/TYPE     /        A/        B/     SEED
 session ITV       0.000   5000 NEGEXP        0.250            33427485
 session T         0.000   5000 NEGEXP   1.111&-002            22276755
-bitrate ITV       0.000  44286 NEGEXP        0.100            46847980
+bitrate ITV       0.000  41449 NEGEXP        0.100            46847980
 is smartphon      0.000   5000 DRAW          0.700            43859043
 
 
@@ -31,32 +32,33 @@ is smartphon      0.000   5000 DRAW          0.700            43859043
                              ***********
 
                     TITLE       /   (RE)SET/   OBS
-                    BR Change         0.000  44286
-                    Very Good         0.000  28429
+                    BR Change         0.000  41449
+                    Very Good         0.000  26553
                     all_sessions      0.000   5000
-                    effective_s       0.000   4425
+                    effective_s       0.000   4183
 
 
                           R E S O U R C E S
                           *****************
 
 TITLE       /   (RE)SET/   OBS/ LIM/ MIN/ NOW/  % USAGE/ AV. WAIT/QMAX
-bandwidth         0.000  19093  100    0  100    94.820     0.000    1
+bandwidth         0.000  18888  100    0  100    94.304     0.000    1
 
 
                                B I N S
                                *******
 
 TITLE       /   (RE)SET/   OBS/INIT/ MAX/ NOW/ AV. FREE/ AV. WAIT/QMAX
-shutdown          0.000   5000    0 5000    0  2540.178 20470.408    1
+shutdown          0.000   5000    0 5000    0  2541.485 20470.408    1
 
 ~~~~~~~~~~ Statistical Data ~~~~~~~~~~
-Average bitrate: 4.80
-Num of bitrate changes: 44648
-Probability of very good QoE: 0.6409
+Average bitrate: 5.11
+Num of bitrate changes: 41555
+Num of very good changes: 26908
+Probability of very good QoE: 0.6475
 Number of all sessions: 5000
-Number of effective sessions: 4454
-Session rejection rate: 0.1092
+Number of effective sessions: 4183
+Session rejection rate: 0.1634
 
 
                        CLOCK TIME =  20129.897
@@ -74,7 +76,7 @@ REPLICATION:   2
 TITLE       /   (RE)SET/   OBS/TYPE     /        A/        B/     SEED
 session ITV       0.000   5000 NEGEXP        0.250            64042082
 session T         0.000   5000 NEGEXP   1.111&-002            44366385
-bitrate ITV       0.000  44648 NEGEXP        0.100            41357879
+bitrate ITV       0.000  41555 NEGEXP        0.100            41357879
 is smartphon      0.000   5000 DRAW          0.700            11320893
 
 
@@ -82,32 +84,33 @@ is smartphon      0.000   5000 DRAW          0.700            11320893
                              ***********
 
                     TITLE       /   (RE)SET/   OBS
-                    BR Change         0.000  44648
-                    Very Good         0.000  28613
+                    BR Change         0.000  41555
+                    Very Good         0.000  26908
                     all_sessions      0.000   5000
-                    effective_s       0.000   4454
+                    effective_s       0.000   4183
 
 
                           R E S O U R C E S
                           *****************
 
 TITLE       /   (RE)SET/   OBS/ LIM/ MIN/ NOW/  % USAGE/ AV. WAIT/QMAX
-bandwidth         0.000  19298  100    0  100    95.244     0.000    1
+bandwidth         0.000  18951  100    0  100    94.640     0.000    1
 
 
                                B I N S
                                *******
 
 TITLE       /   (RE)SET/   OBS/INIT/ MAX/ NOW/ AV. FREE/ AV. WAIT/QMAX
-shutdown          0.000   5000    0 5000    0  2474.868 20129.897    1
+shutdown          0.000   5000    0 5000    0  2476.298 20129.897    1
 
 ~~~~~~~~~~ Statistical Data ~~~~~~~~~~
-Average bitrate: 4.79
-Num of bitrate changes: 44155
-Probability of very good QoE: 0.6332
+Average bitrate: 5.08
+Num of bitrate changes: 41292
+Num of very good changes: 26321
+Probability of very good QoE: 0.6374
 Number of all sessions: 5000
-Number of effective sessions: 4416
-Session rejection rate: 0.1168
+Number of effective sessions: 4132
+Session rejection rate: 0.1736
 
 
                        CLOCK TIME =  20244.564
@@ -125,7 +128,7 @@ REPLICATION:   3
 TITLE       /   (RE)SET/   OBS/TYPE     /        A/        B/     SEED
 session ITV       0.000   5000 NEGEXP        0.250             6528269
 session T         0.000   5000 NEGEXP   1.111&-002            47478000
-bitrate ITV       0.000  44155 NEGEXP        0.100            46802881
+bitrate ITV       0.000  41292 NEGEXP        0.100            46802881
 is smartphon      0.000   5000 DRAW          0.700            59224073
 
 
@@ -133,32 +136,33 @@ is smartphon      0.000   5000 DRAW          0.700            59224073
                              ***********
 
                     TITLE       /   (RE)SET/   OBS
-                    BR Change         0.000  44155
-                    Very Good         0.000  27959
+                    BR Change         0.000  41292
+                    Very Good         0.000  26321
                     all_sessions      0.000   5000
-                    effective_s       0.000   4416
+                    effective_s       0.000   4132
 
 
                           R E S O U R C E S
                           *****************
 
 TITLE       /   (RE)SET/   OBS/ LIM/ MIN/ NOW/  % USAGE/ AV. WAIT/QMAX
-bandwidth         0.000  19299  100    0  100    94.325     0.000    1
+bandwidth         0.000  18954  100    0  100    93.709     0.000    1
 
 
                                B I N S
                                *******
 
 TITLE       /   (RE)SET/   OBS/INIT/ MAX/ NOW/ AV. FREE/ AV. WAIT/QMAX
-shutdown          0.000   5000    0 5000    0  2528.308 20244.564    1
+shutdown          0.000   5000    0 5000    0  2529.620 20244.564    1
 
 ~~~~~~~~~~ Statistical Data ~~~~~~~~~~
-Average bitrate: 4.80
-Num of bitrate changes: 44280
-Probability of very good QoE: 0.6467
+Average bitrate: 5.11
+Num of bitrate changes: 41292
+Num of very good changes: 26611
+Probability of very good QoE: 0.6445
 Number of all sessions: 5000
-Number of effective sessions: 4424
-Session rejection rate: 0.1152
+Number of effective sessions: 4139
+Session rejection rate: 0.1722
 
 
                        CLOCK TIME =  20142.500
@@ -176,7 +180,7 @@ REPLICATION:   4
 TITLE       /   (RE)SET/   OBS/TYPE     /        A/        B/     SEED
 session ITV       0.000   5000 NEGEXP        0.250            22046052
 session T         0.000   5000 NEGEXP   1.111&-002            65931384
-bitrate ITV       0.000  44280 NEGEXP        0.100            25261809
+bitrate ITV       0.000  41292 NEGEXP        0.100            25261809
 is smartphon      0.000   5000 DRAW          0.700            17756070
 
 
@@ -184,32 +188,33 @@ is smartphon      0.000   5000 DRAW          0.700            17756070
                              ***********
 
                     TITLE       /   (RE)SET/   OBS
-                    BR Change         0.000  44280
-                    Very Good         0.000  28636
+                    BR Change         0.000  41292
+                    Very Good         0.000  26611
                     all_sessions      0.000   5000
-                    effective_s       0.000   4424
+                    effective_s       0.000   4139
 
 
                           R E S O U R C E S
                           *****************
 
 TITLE       /   (RE)SET/   OBS/ LIM/ MIN/ NOW/  % USAGE/ AV. WAIT/QMAX
-bandwidth         0.000  19157  100    0  100    94.899     0.000    1
+bandwidth         0.000  18885  100    0  100    94.335     0.000    1
 
 
                                B I N S
                                *******
 
 TITLE       /   (RE)SET/   OBS/INIT/ MAX/ NOW/ AV. FREE/ AV. WAIT/QMAX
-shutdown          0.000   5000    0 5000    0  2523.010 20142.500    1
+shutdown          0.000   5000    0 5000    0  2524.323 20142.500    1
 
 ~~~~~~~~~~ Statistical Data ~~~~~~~~~~
-Average bitrate: 4.78
-Num of bitrate changes: 45203
-Probability of very good QoE: 0.6269
+Average bitrate: 4.99
+Num of bitrate changes: 42482
+Num of very good changes: 26260
+Probability of very good QoE: 0.6181
 Number of all sessions: 5000
-Number of effective sessions: 4424
-Session rejection rate: 0.1152
+Number of effective sessions: 4176
+Session rejection rate: 0.1648
 
 
                        CLOCK TIME =  20535.877
@@ -227,7 +232,7 @@ REPLICATION:   5
 TITLE       /   (RE)SET/   OBS/TYPE     /        A/        B/     SEED
 session ITV       0.000   5000 NEGEXP        0.250            45177506
 session T         0.000   5000 NEGEXP   1.111&-002             8824372
-bitrate ITV       0.000  45203 NEGEXP        0.100            57825298
+bitrate ITV       0.000  42482 NEGEXP        0.100            57825298
 is smartphon      0.000   5000 DRAW          0.700             2645523
 
 
@@ -235,32 +240,33 @@ is smartphon      0.000   5000 DRAW          0.700             2645523
                              ***********
 
                     TITLE       /   (RE)SET/   OBS
-                    BR Change         0.000  45203
-                    Very Good         0.000  28340
+                    BR Change         0.000  42482
+                    Very Good         0.000  26260
                     all_sessions      0.000   5000
-                    effective_s       0.000   4424
+                    effective_s       0.000   4176
 
 
                           R E S O U R C E S
                           *****************
 
 TITLE       /   (RE)SET/   OBS/ LIM/ MIN/ NOW/  % USAGE/ AV. WAIT/QMAX
-bandwidth         0.000  19501  100    0  100    94.099     0.000    1
+bandwidth         0.000  19585  100    0  100    93.657     0.000    1
 
 
                                B I N S
                                *******
 
 TITLE       /   (RE)SET/   OBS/INIT/ MAX/ NOW/ AV. FREE/ AV. WAIT/QMAX
-shutdown          0.000   5000    0 5000    0  2551.059 20535.877    1
+shutdown          0.000   5000    0 5000    0  2552.208 20535.877    1
 
 ~~~~~~~~~~ Statistical Data ~~~~~~~~~~
-Average bitrate: 4.79
-Num of bitrate changes: 43523
-Probability of very good QoE: 0.6517
+Average bitrate: 5.18
+Num of bitrate changes: 40541
+Num of very good changes: 26649
+Probability of very good QoE: 0.6573
 Number of all sessions: 5000
-Number of effective sessions: 4419
-Session rejection rate: 0.1162
+Number of effective sessions: 4154
+Session rejection rate: 0.1692
 
 
                        CLOCK TIME =  20493.076
@@ -278,7 +284,7 @@ REPLICATION:   6
 TITLE       /   (RE)SET/   OBS/TYPE     /        A/        B/     SEED
 session ITV       0.000   5000 NEGEXP        0.250             5108374
 session T         0.000   5000 NEGEXP   1.111&-002            54894435
-bitrate ITV       0.000  43523 NEGEXP        0.100            15960328
+bitrate ITV       0.000  40541 NEGEXP        0.100            15960328
 is smartphon      0.000   5000 DRAW          0.700            23259438
 
 
@@ -286,32 +292,33 @@ is smartphon      0.000   5000 DRAW          0.700            23259438
                              ***********
 
                     TITLE       /   (RE)SET/   OBS
-                    BR Change         0.000  43523
-                    Very Good         0.000  28362
+                    BR Change         0.000  40541
+                    Very Good         0.000  26649
                     all_sessions      0.000   5000
-                    effective_s       0.000   4419
+                    effective_s       0.000   4154
 
 
                           R E S O U R C E S
                           *****************
 
 TITLE       /   (RE)SET/   OBS/ LIM/ MIN/ NOW/  % USAGE/ AV. WAIT/QMAX
-bandwidth         0.000  18711  100    0  100    93.250     0.000    1
+bandwidth         0.000  18372  100    0  100    92.632     0.000    1
 
 
                                B I N S
                                *******
 
 TITLE       /   (RE)SET/   OBS/INIT/ MAX/ NOW/ AV. FREE/ AV. WAIT/QMAX
-shutdown          0.000   5000    0 5000    0  2584.041 20493.076    1
+shutdown          0.000   5000    0 5000    0  2585.382 20493.076    1
 
 ~~~~~~~~~~ Statistical Data ~~~~~~~~~~
-Average bitrate: 4.79
-Num of bitrate changes: 44400
-Probability of very good QoE: 0.6455
+Average bitrate: 5.10
+Num of bitrate changes: 41525
+Num of very good changes: 26698
+Probability of very good QoE: 0.6429
 Number of all sessions: 5000
-Number of effective sessions: 4393
-Session rejection rate: 0.1214
+Number of effective sessions: 4099
+Session rejection rate: 0.1802
 
 
                        CLOCK TIME =  20530.467
@@ -329,7 +336,7 @@ REPLICATION:   7
 TITLE       /   (RE)SET/   OBS/TYPE     /        A/        B/     SEED
 session ITV       0.000   5000 NEGEXP        0.250            29874565
 session T         0.000   5000 NEGEXP   1.111&-002            57725899
-bitrate ITV       0.000  44400 NEGEXP        0.100            29770463
+bitrate ITV       0.000  41525 NEGEXP        0.100            29770463
 is smartphon      0.000   5000 DRAW          0.700            45720868
 
 
@@ -337,32 +344,33 @@ is smartphon      0.000   5000 DRAW          0.700            45720868
                              ***********
 
                     TITLE       /   (RE)SET/   OBS
-                    BR Change         0.000  44400
-                    Very Good         0.000  28658
+                    BR Change         0.000  41525
+                    Very Good         0.000  26698
                     all_sessions      0.000   5000
-                    effective_s       0.000   4393
+                    effective_s       0.000   4099
 
 
                           R E S O U R C E S
                           *****************
 
 TITLE       /   (RE)SET/   OBS/ LIM/ MIN/ NOW/  % USAGE/ AV. WAIT/QMAX
-bandwidth         0.000  19367  100    0  100    94.583     0.000    1
+bandwidth         0.000  18844  100    0  100    93.985     0.000    1
 
 
                                B I N S
                                *******
 
 TITLE       /   (RE)SET/   OBS/INIT/ MAX/ NOW/ AV. FREE/ AV. WAIT/QMAX
-shutdown          0.000   5000    0 5000    0  2502.847 20530.467    1
+shutdown          0.000   5000    0 5000    0  2504.082 20530.467    1
 
 ~~~~~~~~~~ Statistical Data ~~~~~~~~~~
-Average bitrate: 4.79
-Num of bitrate changes: 45844
-Probability of very good QoE: 0.6355
+Average bitrate: 5.07
+Num of bitrate changes: 42738
+Num of very good changes: 27397
+Probability of very good QoE: 0.6410
 Number of all sessions: 5000
-Number of effective sessions: 4460
-Session rejection rate: 0.1080
+Number of effective sessions: 4178
+Session rejection rate: 0.1644
 
 
                        CLOCK TIME =  20881.399
@@ -380,7 +388,7 @@ REPLICATION:   8
 TITLE       /   (RE)SET/   OBS/TYPE     /        A/        B/     SEED
 session ITV       0.000   5000 NEGEXP        0.250            38765876
 session T         0.000   5000 NEGEXP   1.111&-002            32805256
-bitrate ITV       0.000  45844 NEGEXP        0.100            38072034
+bitrate ITV       0.000  42738 NEGEXP        0.100            38072034
 is smartphon      0.000   5000 DRAW          0.700            26185753
 
 
@@ -388,32 +396,33 @@ is smartphon      0.000   5000 DRAW          0.700            26185753
                              ***********
 
                     TITLE       /   (RE)SET/   OBS
-                    BR Change         0.000  45844
-                    Very Good         0.000  29134
+                    BR Change         0.000  42738
+                    Very Good         0.000  27397
                     all_sessions      0.000   5000
-                    effective_s       0.000   4460
+                    effective_s       0.000   4178
 
 
                           R E S O U R C E S
                           *****************
 
 TITLE       /   (RE)SET/   OBS/ LIM/ MIN/ NOW/  % USAGE/ AV. WAIT/QMAX
-bandwidth         0.000  19913  100    0  100    94.277     0.000    1
+bandwidth         0.000  19612  100    0  100    93.654     0.000    1
 
 
                                B I N S
                                *******
 
 TITLE       /   (RE)SET/   OBS/INIT/ MAX/ NOW/ AV. FREE/ AV. WAIT/QMAX
-shutdown          0.000   5000    0 5000    0  2551.137 20881.399    1
+shutdown          0.000   5000    0 5000    0  2552.521 20881.399    1
 
 ~~~~~~~~~~ Statistical Data ~~~~~~~~~~
-Average bitrate: 4.79
-Num of bitrate changes: 44368
-Probability of very good QoE: 0.6475
+Average bitrate: 5.06
+Num of bitrate changes: 42274
+Num of very good changes: 26769
+Probability of very good QoE: 0.6332
 Number of all sessions: 5000
-Number of effective sessions: 4457
-Session rejection rate: 0.1086
+Number of effective sessions: 4200
+Session rejection rate: 0.1600
 
 
                        CLOCK TIME =  20381.124
@@ -431,7 +440,7 @@ REPLICATION:   9
 TITLE       /   (RE)SET/   OBS/TYPE     /        A/        B/     SEED
 session ITV       0.000   5000 NEGEXP        0.250            50241861
 session T         0.000   5000 NEGEXP   1.111&-002            51787690
-bitrate ITV       0.000  44368 NEGEXP        0.100            55800082
+bitrate ITV       0.000  42274 NEGEXP        0.100            55800082
 is smartphon      0.000   5000 DRAW          0.700            45105654
 
 
@@ -439,32 +448,33 @@ is smartphon      0.000   5000 DRAW          0.700            45105654
                              ***********
 
                     TITLE       /   (RE)SET/   OBS
-                    BR Change         0.000  44368
-                    Very Good         0.000  28728
+                    BR Change         0.000  42274
+                    Very Good         0.000  26769
                     all_sessions      0.000   5000
-                    effective_s       0.000   4457
+                    effective_s       0.000   4200
 
 
                           R E S O U R C E S
                           *****************
 
 TITLE       /   (RE)SET/   OBS/ LIM/ MIN/ NOW/  % USAGE/ AV. WAIT/QMAX
-bandwidth         0.000  19304  100    0  100    94.559     0.000    1
+bandwidth         0.000  19411  100    0  100    94.244     0.000    1
 
 
                                B I N S
                                *******
 
 TITLE       /   (RE)SET/   OBS/INIT/ MAX/ NOW/ AV. FREE/ AV. WAIT/QMAX
-shutdown          0.000   5000    0 5000    0  2472.499 20381.124    1
+shutdown          0.000   5000    0 5000    0  2473.420 20381.124    1
 
 ~~~~~~~~~~ Statistical Data ~~~~~~~~~~
-Average bitrate: 4.79
-Num of bitrate changes: 44450
-Probability of very good QoE: 0.6455
+Average bitrate: 5.04
+Num of bitrate changes: 41968
+Num of very good changes: 26571
+Probability of very good QoE: 0.6331
 Number of all sessions: 5000
-Number of effective sessions: 4415
-Session rejection rate: 0.1170
+Number of effective sessions: 4159
+Session rejection rate: 0.1682
 
 
                        CLOCK TIME =  20368.631
@@ -482,7 +492,7 @@ REPLICATION:  10
 TITLE       /   (RE)SET/   OBS/TYPE     /        A/        B/     SEED
 session ITV       0.000   5000 NEGEXP        0.250            44700792
 session T         0.000   5000 NEGEXP   1.111&-002            19611216
-bitrate ITV       0.000  44450 NEGEXP        0.100            42144943
+bitrate ITV       0.000  41968 NEGEXP        0.100            42144943
 is smartphon      0.000   5000 DRAW          0.700            31560309
 
 
@@ -490,24 +500,24 @@ is smartphon      0.000   5000 DRAW          0.700            31560309
                              ***********
 
                     TITLE       /   (RE)SET/   OBS
-                    BR Change         0.000  44450
-                    Very Good         0.000  28692
+                    BR Change         0.000  41968
+                    Very Good         0.000  26571
                     all_sessions      0.000   5000
-                    effective_s       0.000   4415
+                    effective_s       0.000   4159
 
 
                           R E S O U R C E S
                           *****************
 
 TITLE       /   (RE)SET/   OBS/ LIM/ MIN/ NOW/  % USAGE/ AV. WAIT/QMAX
-bandwidth         0.000  19381  100    0  100    94.676     0.000    1
+bandwidth         0.000  19214  100    0  100    94.152     0.000    1
 
 
                                B I N S
                                *******
 
 TITLE       /   (RE)SET/   OBS/INIT/ MAX/ NOW/ AV. FREE/ AV. WAIT/QMAX
-shutdown          0.000   5000    0 5000    0  2496.384 20368.631    1
+shutdown          0.000   5000    0 5000    0  2497.481 20368.631    1
 
 
 
@@ -524,23 +534,21 @@ shutdown          0.000   5000    0 5000    0  2496.384 20368.631    1
                              ***********
 
  TITLE      /   (RE)SET/   OBS/  AVERAGE/EST.ST.DV/ STD.ERR.
-BR Change         0.000     10 44515.700   625.181   197.699
-Very Good         0.000     10 28555.100   308.948    97.698
+BR Change         0.000     10 41711.600   656.572   207.626
+Very Good         0.000     10 26673.700   318.492   100.716
 all_sessions      0.000     10  5000.000     0.000     0.000
-effective_s       0.000     10  4428.700    21.592     6.828
+effective_s       0.000     10  4160.300    30.222     9.557
 
 
                           R E S O U R C E S
                           *****************
 
 TITLE       /   (RE)SET/   OBS/  % USAGE/EST.ST.DV/ AV. WAIT/EST.ST.DV
-bandwidth         0.000     10    94.473     0.543     0.000     0.000
+bandwidth         0.000     10    93.931     0.562     0.000     0.000
 
 
                                B I N S
                                *******
 
 TITLE       /   (RE)SET/   OBS/ AV. FREE/EST.ST.DV/ AV. WAIT/EST.ST.DV
-shutdown          0.000     10  2522.433    35.911 20417.794   221.722
-
-171 garbage collection(s) in 0.1 seconds.
+shutdown          0.000     10  2523.682    35.974 20417.794   221.722
