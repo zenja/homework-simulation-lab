@@ -3,4 +3,6 @@ begin
     n := 5;
     outfix(n, 0, 0);
     outimage;
+    outfix(1/90, 10, 0);
+    outimage;
 end;

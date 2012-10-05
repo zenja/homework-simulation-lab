@@ -15,8 +15,8 @@ begin
     integer bStep_;
 
     ! statistical data;
-    real dataAmount_;                ! all amount of transmitted data of all sessions;
-    real timeAmount_;                ! all amount of  time of all sessions;
+    long real dataAmount_;                ! all amount of transmitted data of all sessions;
+    long real timeAmount_;                ! all amount of  time of all sessions;
     ref(count) numBitrateChange_;    ! the number of bitrate changes;
     ref(count) numVeryGood_;         ! the number of very good quality of all sessions;
     ref(count) numAllSession_;       ! the number of all sessions, both effective ones and rejected ones;
@@ -57,7 +57,7 @@ begin
         integer i;
         for i := 1 step 1 until numSession do
         begin
-            integer sessionIntervalTime;
+            real sessionIntervalTime;
             sessionIntervalTime := sessionInterval_.sample;
             new Session(edit("Session", i)).schedule(0);
             hold(sessionIntervalTime);
@@ -70,7 +70,7 @@ begin
 
     entity class Session;
     begin
-        long real timestamp;
+        long real starttime;
         long real endtime;
         integer acquiredBandwidth;
         boolean isSmartphone;
@@ -91,6 +91,7 @@ begin
             else begin
                 num := bandwidth_.avail;
             end;
+
             bandwidth_.acquire(num);
             acquiredBandwidth := num;
 
@@ -151,13 +152,13 @@ begin
 
         !--------------- statements ---------------;
 
-        timestamp := time;
-        endtime := timestamp + sessionTime_.sample;
+        starttime := time;
+        endtime := starttime + sessionTime_.sample;
         acquiredBandwidth := 0; ! init value;
         isSmartphone := drawSmartphone_.sample;
 
         ! debug;
-        my_debug_r("session last time: ", endtime - timestamp);
+        my_debug_r("session last time: ", endtime - starttime);
 
         ! one new session;
         numAllSession_.update(1);
@@ -180,7 +181,14 @@ begin
             real remainingTime, sampleTime, actualTime;
             sampleTime := bitrateInterval_.sample;
             remainingTime := endtime - time;
-            if sampleTime > remainingTime then actualTime := remainingTime else actualTime := sampleTime;
+
+            if sampleTime > remainingTime then begin
+                actualTime := remainingTime;
+            end
+            else begin 
+                actualTime := sampleTime;
+            end;
+
             hold(actualTime);
 
             ! change bitrate;
@@ -188,9 +196,6 @@ begin
 
             ! updata statistical data;
             updateTransmitCount(acquiredBandwidth, actualTime);
-
-            ! debug;
-            my_debug_i("bitrate changed: ", acquiredBandwidth);
         end;
 
         ! IMPORTANT: release acquired bandwidth;
@@ -208,13 +213,14 @@ begin
 
     sessionInterval_ :- new NegExp("session ITV", 1/4);
     sessionTime_ :- new NegExp("session T", 1/90);
-    bitrateInterval_ :- new NegExp("bitrate ITV", 0.1);
+    !bitrateInterval_ :- new NegExp("bitrate ITV", 0.1);
+    bitrateInterval_ :- new Constant("bitrate ITV", 1);
     bandwidth_ :- new Res("bandwidth", 100);
     shutdown_ :- new Bin("shutdown", 0);
     drawSmartphone_ :- new Draw("is smartphone", 0.7);
     bMin_ := 2;
     bMax_ := 8;
-    bStep_ := 2;
+    bStep_ := 1;
 
     ! init statistical data;
     dataAmount_ := 0.0;
@@ -237,8 +243,26 @@ begin
         shutdown_.take(numSession);
 
         ! print statistical data which cannot be printed automatically;
-        outtext("***Average bitrate:***");
+        outimage;
+        outtext("~~~~~~~~~~ Statistical Data ~~~~~~~~~~");
+        outimage;
+        outtext("Average bitrate: ");
         outfix(dataAmount_/timeAmount_, 2, 0);
+        outimage;
+        outtext("Num of bitrate changes: ");
+        outfix(numBitrateChange_.Obs, 0, 0);
+        outimage;
+        outtext("Probability of very good QoE: ");
+        outfix(numVeryGood_.Obs/numBitrateChange_.Obs, 4, 0);
+        outimage;
+        outtext("Number of all sessions: ");
+        outfix(numAllSession_.Obs, 0, 0);
+        outimage;
+        outtext("Number of effective sessions: ");
+        outfix(numEffectiveSession_.Obs, 0, 0);
+        outimage;
+        outtext("Session rejection rate: ");
+        outfix((numAllSession_.Obs - numEffectiveSession_.Obs)/numAllSession_.Obs, 4, 0);
         outimage;
 
         REPLICATE;
