@@ -22,6 +22,14 @@ begin
     ref(count) numAllSession_;       ! the number of all sessions, both effective ones and rejected ones;
     ref(count) numEffectiveSession_; ! the number of effective sessions;
 
+    ! statistical data during all replications;
+    long real allDataAmount_;
+    long real allTimeAmount_;
+    integer allNumBitrateChange_;
+    integer allNumVeryGood_;
+    integer allNumAllSession_;
+    integer allNumEffectiveSession_;
+
     ! debug flag;
     boolean debugFlag_;
 
@@ -214,7 +222,7 @@ begin
     sessionInterval_ :- new NegExp("session ITV", 1/4);
     sessionTime_ :- new NegExp("session T", 1/90);
     !bitrateInterval_ :- new NegExp("bitrate ITV", 0);
-    bitrateInterval_ :- new Constant("bitrate ITV", 1);
+    bitrateInterval_ :- new Constant("bitrate ITV", 10);
     bandwidth_ :- new Res("bandwidth", 100);
     shutdown_ :- new Bin("shutdown", 0);
     drawSmartphone_ :- new Draw("is smartphone", 0.7);
@@ -229,6 +237,14 @@ begin
     numVeryGood_ :- new count("Very Good");
     numAllSession_ :- new count("all_sessions");
     numEffectiveSession_ :- new count("effective_s");
+
+    ! init statistical data during all replications;
+    allDataAmount_ := 0;
+    allTimeAmount_ := 0;
+    allNumBitrateChange_ := 0;
+    allNumVeryGood_ := 0;
+    allNumAllSession_ := 0;
+    allNumEffectiveSession_ := 0;
 
     ! debug flag;
     debugFlag_ := false;
@@ -272,7 +288,36 @@ begin
         outfix((numAllSession_.Obs - numEffectiveSession_.Obs)/numAllSession_.Obs, 4, 0);
         outimage;
 
+        ! accumulate statistical data during all replications;
+        allDataAmount_ := allDataAmount_ + dataAmount_;
+        allTimeAmount_ := allTimeAmount_ + timeAmount_;
+        allNumAllSession_ := allNumAllSession_ + numAllSession_.Obs;
+        allNumEffectiveSession_ := allNumEffectiveSession_ + numEffectiveSession_.Obs;
+        allNumBitrateChange_ := allNumBitrateChange_ + numBitrateChange_.Obs;
+        allNumVeryGood_ := allNumVeryGood_ + numVeryGood_.Obs;
+
         REPLICATE;
     end;
+
+    ! print statistical data across all replications;
+    outimage;
+    outtext("############### Average Statistical Data ###############");
+    outimage;
+    outtext("Average bitrate: ");
+    outfix(allDataAmount_ / allTimeAmount_, 2, 0);
+    outimage;
+    outtext("Average number of bitrate changes: ");
+    outfix(allNumBitrateChange_ / 10, 0, 0);
+    outimage;
+    outtext("Average number of very good changes: ");
+    outfix(allNumVeryGood_ / 10, 0, 0);
+    outimage;
+    outtext("Probability of very good QoE: ");
+    outfix(allNumVeryGood_ / allNumBitrateChange_, 4, 0);
+    outimage;
+    outtext("Average sessions rejection rate: ");
+    outfix(1 - (allNumEffectiveSession_ / allNumAllSession_), 4, 0);
+    outimage;
+    outtext("########################################################");
 
 end;

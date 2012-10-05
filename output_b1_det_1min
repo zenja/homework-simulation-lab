@@ -519,6 +519,13 @@ bandwidth         0.000 172380  100    0  100    96.270     0.000    1
 TITLE       /   (RE)SET/   OBS/INIT/ MAX/ NOW/ AV. FREE/ AV. WAIT/QMAX
 shutdown          0.000   5000    0 5000    0  2494.236 20368.631    1
 
+############### Average Statistical Data ###############
+Average bitrate: 4.44
+Average number of bitrate changes: 443197
+Average number of very good changes: 222564
+Probability of very good QoE: 0.5022
+Average sessions rejection rate: 0.0272
+########################################################
 
 
                        CLOCK TIME =      0.000
@@ -553,4 +560,4 @@ bandwidth         0.000     10    95.934     0.584     0.000     0.000
 TITLE       /   (RE)SET/   OBS/ AV. FREE/EST.ST.DV/ AV. WAIT/EST.ST.DV
 shutdown          0.000     10  2520.553    35.880 20417.794   221.722
 
-6 garbage collection(s) in 1.8 seconds.
+6 garbage collection(s) in 1.7 seconds.
