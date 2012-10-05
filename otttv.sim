@@ -59,8 +59,8 @@ begin
         begin
             real sessionIntervalTime;
             sessionIntervalTime := sessionInterval_.sample;
-            new Session(edit("Session", i)).schedule(0);
             hold(sessionIntervalTime);
+            new Session(edit("Session", i)).schedule(0);
 
             ! debug;
             my_debug_i("session interval: ", sessionIntervalTime);
@@ -191,11 +191,11 @@ begin
 
             hold(actualTime);
 
-            ! change bitrate;
-            change_bitrate;
-
             ! updata statistical data;
             updateTransmitCount(acquiredBandwidth, actualTime);
+
+            ! change bitrate;
+            change_bitrate;
         end;
 
         ! IMPORTANT: release acquired bandwidth;
@@ -213,14 +213,14 @@ begin
 
     sessionInterval_ :- new NegExp("session ITV", 1/4);
     sessionTime_ :- new NegExp("session T", 1/90);
-    !bitrateInterval_ :- new NegExp("bitrate ITV", 0.1);
-    bitrateInterval_ :- new Constant("bitrate ITV", 1);
+    bitrateInterval_ :- new NegExp("bitrate ITV", 0.1);
+    !bitrateInterval_ :- new Constant("bitrate ITV", 1);
     bandwidth_ :- new Res("bandwidth", 100);
     shutdown_ :- new Bin("shutdown", 0);
     drawSmartphone_ :- new Draw("is smartphone", 0.7);
     bMin_ := 2;
     bMax_ := 8;
-    bStep_ := 1;
+    bStep_ := 2;
 
     ! init statistical data;
     dataAmount_ := 0.0;
